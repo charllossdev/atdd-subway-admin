@@ -20,6 +20,7 @@ public class LineService {
 		this.lineRepository = lineRepository;
 	}
 
+	@Transactional
 	public LineResponse saveLine(LineRequest request) {
 		Line persistLine = lineRepository.save(request.toLine());
 		return LineResponse.of(persistLine);
@@ -39,6 +40,7 @@ public class LineService {
 		return LineResponse.of(persistLine);
 	}
 
+	@Transactional
 	public LineResponse updateLine(Long id, LineRequest request) {
 		Line line = findLine(id);
 		line.update(request.toLine());

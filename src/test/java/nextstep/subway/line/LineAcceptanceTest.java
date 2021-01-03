@@ -25,7 +25,7 @@ public class LineAcceptanceTest extends AcceptanceTest {
 	@Test
 	void createLine() {
 		// given
-		Map<String, String> params = generateParam("2호선", "green");
+		Map<String, String> params = generateParam("2호선", "green", "1", "2", "100");
 
 		// when
 		ExtractableResponse<Response> response = 지하철_노선_생성_요청(params);
@@ -201,6 +201,22 @@ public class LineAcceptanceTest extends AcceptanceTest {
 		Map<String, String> params = new HashMap<>();
 		params.put("name", name);
 		params.put("color", color);
+		return params;
+	}
+
+	private Map<String, String> generateParam(String name,
+		String color,
+		String upStationId,
+		String downStationId,
+		String distance) {
+
+		Map<String, String> params = new HashMap<>();
+		params.put("name", name);
+		params.put("color", color);
+		params.put("upStationId", upStationId);
+		params.put("downStationId", downStationId);
+		params.put("distance", distance);
+
 		return params;
 	}
 }

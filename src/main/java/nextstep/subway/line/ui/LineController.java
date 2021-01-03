@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import nextstep.subway.aop.LogExecutionTime;
 import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.dto.LineRequest;
 import nextstep.subway.line.dto.LineResponse;
 
 @RestController
 @RequestMapping("/lines")
+
 public class LineController {
 	private final LineService lineService;
 
@@ -27,10 +29,17 @@ public class LineController {
 		this.lineService = lineService;
 	}
 
+	@LogExecutionTime
 	@PostMapping
 	public ResponseEntity<LineResponse> createLine(@RequestBody LineRequest lineRequest) {
 		LineResponse line = lineService.saveLine(lineRequest);
 		return ResponseEntity.created(URI.create("/lines/" + line.getId())).body(line);
+	}
+
+	@PostMapping("/{id}/sections")
+	public ResponseEntity<LineResponse> createSections(@RequestBody LineRequest lineRequest) {
+		System.out.println(lineRequest.toString());
+		return null;
 	}
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
