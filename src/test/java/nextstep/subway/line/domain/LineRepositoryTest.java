@@ -31,7 +31,7 @@ class LineRepositoryTest {
 		assertAll(
 			() -> assertThat(line).isNotNull(),
 			() -> assertThat(line.getId()).isNotNull(),
-			() -> assertThat(line.getSections()).hasSize(1),
+			() -> assertThat(line.getSections()).hasSize(3),
 			() -> assertThat(line.getStations()).hasSize(2)
 		);
 	}

@@ -32,11 +32,11 @@ public class Section {
 	private Line line;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "up_station_id")
+	@JoinColumn(name = "upStationId", nullable = true)
 	private Station upStation;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "down_station_id")
+	@JoinColumn(name = "downStationId", nullable = true)
 	private Station downStation;
 
 	private int distance;
@@ -46,7 +46,7 @@ public class Section {
 	}
 
 	public Section(Line line, Station upStation, Station downStation, int distance) {
-		if (upStation.equals(downStation)) {
+		if (upStation != null && upStation.equals(downStation)) {
 			throw new RuntimeException("중복된 Station 입니다.");
 		}
 		this.line = line;
